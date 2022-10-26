@@ -1,0 +1,7 @@
+DELETE FROM genres
+WHERE id = 3;
+
+DELETE FROM genres
+WHERE id = 2;
+================================================================================================
+[23:07:19] Ошибка при выполнении SQL запроса к базе данных 'test': FOREIGN KEY constraint failed
