@@ -29,9 +29,10 @@ public class Connect {
     }
 
     // --------Заполнение таблицы--------
-    public static void WriteDB() throws SQLException
+    public static void insert_type(String type) throws SQLException
     {
-        System.out.println("TABLE WRITE");
+        String request = String.format("INSERT INTO 'types' ('type') VALUES ('%s')", type);
+        statmt.execute(request);
     }
 
     // -------- Вывод таблицы--------
