@@ -29,7 +29,7 @@ public class Main {
     public static void main(String[] args)throws ClassNotFoundException, SQLException {
         Connect.Conn();
         Connect.CreateDB();
-        Connect.add_all_types(types);
+        Connect.update_type(129, "rewq");
         Connect.ReadDB();
         Connect.CloseDB();
     }
