@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+
+
 public class Connect {
     public static Connection conn;
     public static Statement statmt;
@@ -33,6 +35,14 @@ public class Connect {
     {
         String request = String.format("INSERT INTO 'types' ('type') VALUES ('%s')", type);
         statmt.execute(request);
+    }
+
+    public static void add_all_types(String[] types) throws SQLException
+    {
+        for (String type:types){
+            String request = String.format("INSERT INTO 'types' ('type') VALUES ('%s')", type);
+            statmt.execute(request);
+        }
     }
 
     // -------- Вывод таблицы--------

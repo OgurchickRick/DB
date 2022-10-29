@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2d8c042a-3cbd-4b3b-b261-fd7dd4770f21" name="Changes" comment="Создание БД">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="2d8c042a-3cbd-4b3b-b261-fd7dd4770f21" name="Changes" comment="Заполнение БД">
       <change beforePath="$PROJECT_DIR$/src/Connect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Connect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +108,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667073401001</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Заполнение БД">
+      <created>1667074004587</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1667074004587</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -130,6 +135,7 @@
     <MESSAGE value="INSERT Множественное Добавление" />
     <MESSAGE value="DELETE" />
     <MESSAGE value="Создание БД" />
-    <option name="LAST_COMMIT_MESSAGE" value="Создание БД" />
+    <MESSAGE value="Заполнение БД" />
+    <option name="LAST_COMMIT_MESSAGE" value="Заполнение БД" />
   </component>
 </project>
