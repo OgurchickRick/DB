@@ -19,8 +19,10 @@ public class Connect {
 
     // --------Создание таблицы--------
     public static void CreateDB() throws ClassNotFoundException, SQLException {
+
         statmt = conn.createStatement();
         statmt.execute("CREATE TABLE if not exists 'types' ('id' INTEGER PRIMARY KEY AUTOINCREMENT, 'type' text);");
+        statmt.execute("CREATE TABLE if not exists 'cat' ('id' INTEGER PRIMARY KEY AUTOINCREMENT, 'name' text, 'type_id' INTEGER, 'age' INTEGER, 'weight' double, FOREIGN KEY(type_id) REFERENCES types(id));");
 
         System.out.println("TABLE CREATE!");
     }
