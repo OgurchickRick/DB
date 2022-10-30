@@ -1,4 +1,6 @@
 import java.sql.*;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class Connect {
@@ -49,8 +51,9 @@ public class Connect {
         preparedStatement.executeUpdate();
     }
 
+
     // -------- Вывод таблицы--------
-    public static void ReadDB() throws ClassNotFoundException, SQLException {
+    public static void get_all_types() throws ClassNotFoundException, SQLException {
         resSet = statmt.executeQuery("SELECT * FROM types");
 
         while(resSet.next())
@@ -64,6 +67,33 @@ public class Connect {
 
         System.out.println("TABLE INPUT");
     }
+
+    public static String get_type(int id) throws SQLException{
+        String request = "SELECT * FROM types WHERE id = ";
+        request += id;
+        resSet = statmt.executeQuery(request);
+
+        return resSet.getString("type");
+    }
+
+    public static void get_type_where(String where) throws SQLException{
+        String request = "SELECT * FROM types WHERE  ";
+        request += where;
+
+        resSet = statmt.executeQuery(request);
+
+        while(resSet.next())
+        {
+            int id = resSet.getInt("id");
+            String type = resSet.getString("type");
+            System.out.println( "ID = " + id );
+            System.out.println( "type = " + type );
+            System.out.println();
+        }
+
+        System.out.println("TABLE INPUT");
+    }
+
 
     // --------Закрытие--------
     public static void CloseDB() throws ClassNotFoundException, SQLException {
