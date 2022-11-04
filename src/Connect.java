@@ -186,6 +186,14 @@ public class Connect {
         return resSet.getString("type");
     }
 
+    public static String get_cat(int id) throws SQLException{
+        String request = "SELECT * FROM cats WHERE id = ";
+        request += id;
+        resSet = statmt.executeQuery(request);
+
+        return resSet.getString("name");
+    }
+
     public static void get_type_where(String where) throws SQLException{
         String request = "SELECT * FROM types WHERE  ";
         request += where;
@@ -198,6 +206,30 @@ public class Connect {
             String type = resSet.getString("type");
             System.out.println( "ID = " + id );
             System.out.println( "type = " + type );
+            System.out.println();
+        }
+
+        System.out.println("TABLE INPUT");
+    }
+
+    public static void get_cat_where(String where) throws SQLException{
+        String request = "SELECT * FROM cats WHERE  ";
+        request += where;
+
+        resSet = statmt.executeQuery(request);
+
+        while(resSet.next())
+        {
+            int id = resSet.getInt("id");
+            String name = resSet.getString("name");
+            int type_id = resSet.getInt("type_id");
+            int age = resSet.getInt("age");
+            Double weight = resSet.getDouble("weight");
+            System.out.println( "ID = " + id );
+            System.out.println( "name = " + name );
+            System.out.println( "type_id = " + type_id );
+            System.out.println( "age = " + age );
+            System.out.println( "weight = " + weight );
             System.out.println();
         }
 
