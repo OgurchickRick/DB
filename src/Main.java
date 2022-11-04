@@ -29,7 +29,8 @@ public class Main {
     public static void main(String[] args)throws ClassNotFoundException, SQLException {
         Connect.Conn();
         Connect.CreateDB();
-        Connect.get_all_types();
+        Connect.insert_cat("WASYA", "DOG", 8, 3.8);
+        Connect.get_all_cats();
         Connect.CloseDB();
     }
 }

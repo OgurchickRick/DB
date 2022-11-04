@@ -7,6 +7,7 @@ public class Connect {
     public static Connection conn;
     public static Statement statmt;
     public static ResultSet resSet;
+    public static ResultSet rs;
 
     // --------ПОДКЛЮЧЕНИЕ К БАЗЕ ДАННЫХ--------
     public static void Conn() throws ClassNotFoundException, SQLException {
@@ -19,10 +20,9 @@ public class Connect {
 
     // --------Создание таблицы--------
     public static void CreateDB() throws ClassNotFoundException, SQLException {
-
         statmt = conn.createStatement();
-        statmt.execute("CREATE TABLE if not exists 'types' ('id' INTEGER PRIMARY KEY AUTOINCREMENT, 'type' text);");
-        statmt.execute("CREATE TABLE if not exists 'cat' ('id' INTEGER PRIMARY KEY AUTOINCREMENT, 'name' text, 'type_id' INTEGER, 'age' INTEGER, 'weight' double, FOREIGN KEY(type_id) REFERENCES types(id));");
+        statmt.execute("CREATE TABLE if not exists 'types' ('id' INTEGER PRIMARY KEY AUTOINCREMENT, 'type' text NOT NULL UNIQUE);");
+        statmt.execute("CREATE TABLE if not exists 'cats' ('id' INTEGER PRIMARY KEY AUTOINCREMENT, 'name' text NOT NULL, 'type_id' INTEGER NOT NULL, 'age' INTEGER NOT NULL, 'weight' double NOT NULL, FOREIGN KEY(type_id) REFERENCES types(id));");
 
         System.out.println("TABLE CREATE!");
     }
@@ -41,7 +41,7 @@ public class Connect {
     }
 
     public static void delete_type(int id) throws SQLException{
-        String request = String.format("DELETE FROM 'types' WHERE id = %s;", id);
+        String request = String.format("DELETE FROM 'types' WHERE id = %d;", id);
         statmt.execute(request);
     }
 
@@ -51,6 +51,28 @@ public class Connect {
         preparedStatement.setString(1, new_type);
         preparedStatement.setInt(2, id);
         preparedStatement.executeUpdate();
+    }
+
+    public static void insert_cat(String name, String type, int age, Double weight) throws SQLException {
+        try {
+            String request = ("INSERT INTO 'cats' ('name', 'type_id', 'age', 'weight') VALUES (?,(SELECT id FROM types WHERE type IN (?) AND type IS NOT NULL), ?, ?)");
+            PreparedStatement preparedStatement = conn.prepareStatement(request);
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, type);
+            preparedStatement.setInt(3, age);
+            preparedStatement.setDouble(4, weight);
+            preparedStatement.execute();
+        } catch (SQLException e){
+            insert_type(type);
+            String request = ("INSERT INTO 'cats' ('name', 'type_id', 'age', 'weight') VALUES (?,(SELECT id FROM types WHERE type IN (?) AND type IS NOT NULL), ?, ?)");
+            PreparedStatement preparedStatement = conn.prepareStatement(request);
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, type);
+            preparedStatement.setInt(3, age);
+            preparedStatement.setDouble(4, weight);
+            preparedStatement.execute();
+        }
+
     }
 
 
@@ -64,6 +86,27 @@ public class Connect {
             String type = resSet.getString("type");
             System.out.println( "ID = " + id );
             System.out.println( "type = " + type );
+            System.out.println();
+        }
+
+        System.out.println("TABLE INPUT");
+    }
+
+    public static void get_all_cats() throws ClassNotFoundException, SQLException {
+        resSet = statmt.executeQuery("SELECT * FROM cats");
+
+        while(resSet.next())
+        {
+            int id = resSet.getInt("id");
+            String name = resSet.getString("name");
+            int type_id = resSet.getInt("type_id");
+            int age = resSet.getInt("age");
+            Double weight = resSet.getDouble("weight");
+            System.out.println( "ID = " + id );
+            System.out.println( "name = " + name );
+            System.out.println( "type_id = " + type_id );
+            System.out.println( "age = " + age );
+            System.out.println( "weight = " + weight );
             System.out.println();
         }
 
