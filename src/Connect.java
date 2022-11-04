@@ -124,6 +124,22 @@ public class Connect {
         }
     }
 
+    public static void delete_cat(int id) throws SQLException{
+        String request = ("DELETE FROM 'cats' WHERE id = ?");
+        PreparedStatement preparedStatement = conn.prepareStatement(request);
+        preparedStatement.setInt(1, id);
+        preparedStatement.executeUpdate();
+    }
+
+    public static void delete_cat(String where) throws SQLException{
+        String request = String.format("DELETE FROM 'cats' WHERE %s;", where);
+        statmt.execute(request);
+    }
+
+    public static void update_cat(String set, String where) throws SQLException{
+        String request = String.format("UPDATE 'cats' SET %s WHERE %s;", set, where);
+        statmt.execute(request);
+    }
 
     // -------- Вывод таблицы--------
     public static void get_all_types() throws ClassNotFoundException, SQLException {
