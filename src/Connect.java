@@ -1,5 +1,10 @@
+import com.sun.tools.javac.Main;
+
 import java.sql.*;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -7,7 +12,32 @@ public class Connect {
     public static Connection conn;
     public static Statement statmt;
     public static ResultSet resSet;
-    public static ResultSet rs;
+
+    static String[] names = {"Гарфилд", "Том", "Гудвин", "Рокки", "Ленивец",
+            "Пушок", "Спорти", "Бегемот", "Пират", "Гудини",
+            "Зорро", "Саймон", "Альбус", "Базилио", "Леопольд",
+            "Нарцисс", "Атос", "Каспер", "Валлито", "Оксфорд",
+            "Бисквит", "Соня", "Клеопатра", "Цунами", "Забияка",
+            "Матильда", "Кнопка", "Масяня", "Царапка", "Серсея",
+            "Ворсинка", "Амели", "Наоми", "Маркиза", "Изольда",
+            "Вальс", "Несквик", "Златан", "Баскет", "Изюм",
+            "Цукат", "Мокко", "Месси", "Кокос", "Адидас",
+            "Бейлиз", "Тайгер", "Зефир", "Мохи", "Валенсия",
+            "Баунти", "Свити", "Текила", "Ириска", "Карамель",
+            "Виски", "Кукуруза", "Гренка", "Фасолька", "Льдинка",
+            "Китана", "Офелия", "Дайкири", "Брусника", "Аватар",
+            "Космос", "Призрак", "Изумруд", "Плинтус", "Яндекс",
+            "Крисмас", "Метеор", "Оптимус", "Смайлик", "Цельсий",
+            "Краска", "Дейзи", "Пенка", "Веста", "Астра",
+            "Эйприл", "Среда", "Бусинка", "Гайка", "Елка",
+            "Золушка", "Мята", "Радость", "Сиам", "Оскар",
+            "Феликс", "Гарри", "Байрон", "Чарли", "Симба",
+            "Тао", "Абу", "Ватсон", "Енисей", "Измир", "Кайзер",
+            "Васаби", "Байкал", "Багира", "Айрис", "Диана",
+            "Мими", "Сакура", "Индия", "Тиффани", "Скарлетт",
+            "Пикси", "Лиззи", "Алиса", "Лило", "Ямайка",
+            "Пэрис", "Мальта", "Аляска"
+    };
 
     // --------ПОДКЛЮЧЕНИЕ К БАЗЕ ДАННЫХ--------
     public static void Conn() throws ClassNotFoundException, SQLException {
@@ -73,6 +103,25 @@ public class Connect {
             preparedStatement.execute();
         }
 
+    }
+
+    public static void add_more_cats(int n) throws SQLException{
+        resSet = statmt.executeQuery("SELECT * FROM types");
+        ArrayList <String> type_list = new ArrayList<>();
+        while(resSet.next())
+        {
+            String type = resSet.getString("type");
+            type_list.add(type);
+        }
+
+
+        for (int i = 0; i < n; i++){
+            String name = names[(int) (Math.random() * names.length)];
+            String type = type_list.get((int) (Math.random() * type_list.size()));
+            int age = (int) (Math.random() * 10);
+            Double weigh = ( 1 + Math.random() * 10);
+            insert_cat(name, type, age, weigh);
+        }
     }
 
 
